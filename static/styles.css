@@ -1,11 +1,38 @@
+.container {
+    display: flex; /* Using flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    min-height: 100vh; /* Full viewport height */
+    background-color: #eaeaea; /* Light background for the whole page */
+    font-family: 'Arial', sans-serif; /* Modern font */
+}
 .schedule {
     background-color: #f8f9fa;
     border-radius: 5px;
     padding: 15px;
     margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+    max-width: 600px; /* Maximum width */
+    width: 100%; /* Responsive width */
+    text-align: center; /* Center text */
 }
 @media (max-width: 576px) {
     .schedule {
         padding: 10px;
     }
+}
+button {
+    background-color: #8e65da; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+}
+ul {
+    list-style-type: none; /* Removes the default bullet points */
+    padding: 0; /* Removes default padding */
+}
+
+li {
+    margin-bottom: 10px; /* Optional: adds space between list items */
 }

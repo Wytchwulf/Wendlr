@@ -258,7 +258,7 @@ def display_training_schedule(training_day):
                 html_output += (
                     f"<li>Skipping {exercise} as weight data is not available.</li>"
                 )
-        html_output += f"<div>{exercise.title()}: "
+        html_output += f"<div>"
         html_output += f"<button id='btn_miss_{exercise}' onclick='incrementCounter(\"{exercise}\", \"Miss\")'>Miss</button>"
         html_output += f"<button id='btn_hit_{exercise}' onclick='incrementCounter(\"{exercise}\", \"Hit\")'>Hit</button>"
         html_output += f"<button id='btn_smash_{exercise}' onclick='incrementCounter(\"{exercise}\", \"Smash\")'>Smash</button>"
