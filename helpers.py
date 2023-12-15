@@ -71,7 +71,7 @@ def is_new_cycle(start_date):
 
     return 0 <= cycle_day <= 3
 
-def increment_exercise_count(exercise_name):
+def increment_exercise_count(exercise_name, increment):
     conn = sqlite3.connect("exercise_database.db")
     cursor = conn.cursor()
 
@@ -82,9 +82,9 @@ def increment_exercise_count(exercise_name):
 
         cursor.execute("""
             INSERT INTO exercise_counts (exercise_id, count)
-            VALUES (?, 1)
+            VALUES (?, ?)
             ON CONFLICT(exercise_id) DO UPDATE SET count = count + 1
-            """, (exercise_id,))
+            """, (exercise_id, increment))
         conn.commit()
     else:
         print("Exercise not found")
@@ -233,6 +233,7 @@ def display_training_schedule(training_day):
                 weights = calculate_weights(one_rep_max, percentages)
                 for set_num, weight in enumerate(weights):
                     html_output += f"<li>Set {set_num + 1}: {reps[set_num]} reps at {weight} kg</li>"
+
         elif idx == 1:
             # Second exercise is 5 sets of 10 reps at 50% 1RM
             one_rep_max = get_one_rep_max(exercise)
@@ -241,6 +242,7 @@ def display_training_schedule(training_day):
                 html_output += (
                     f"<li>{exercise.title()}: 5 sets of 10 reps at {weight} kg</li>"
                 )
+
 
         else:
             # Remaining exercises with their own weight variables
@@ -252,11 +254,15 @@ def display_training_schedule(training_day):
                 else:
                     html_output += f"<li>{exercise.title()}: 3 sets of 10 reps at {weight} kg</li>"
 
-                html_output += f"<button id='btn_{exercise}' onclick='incrementCounter(\"{exercise}\")'>Hit Target for {exercise.title()}</button>"
             else:
                 html_output += (
                     f"<li>Skipping {exercise} as weight data is not available.</li>"
                 )
+        html_output += f"<div>{exercise.title()}: "
+        html_output += f"<button id='btn_miss_{exercise}' onclick='incrementCounter(\"{exercise}\", \"Miss\")'>Miss</button>"
+        html_output += f"<button id='btn_hit_{exercise}' onclick='incrementCounter(\"{exercise}\", \"Hit\")'>Hit</button>"
+        html_output += f"<button id='btn_smash_{exercise}' onclick='incrementCounter(\"{exercise}\", \"Smash\")'>Smash</button>"
+        html_output += "</div>"
 
     html_output += "</ul>"
     return html_output

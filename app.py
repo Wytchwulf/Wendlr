@@ -28,14 +28,22 @@ def index():
 
     return render_template("index.html", message=message, schedule=schedule)
 
-@app.route("/increment_counter", methods=["POST"])
-def increment_counter():
+@app.route('/update_count', methods=['POST'])
+def update_count():
     data = request.json
-    exercise_name = data.get("exercise")
+    exercise_name = data['exercise_name']
+    action = data['action']
 
-    increment_exercise_count(exercise_name)
+    increment = 0
+    if action == "Hit":
+        increment = 1
+    elif action == "Smash":
+        increment = 4 if exercise_name != 'face pull' else 8
 
-    return jsonify({"message": "Counter incremented for " + exercise_name})
+    if increment > 0:
+        increment_exercise_count(exercise_name, increment)
+
+    return jsonify({"success": True})
 
 if __name__ == "__main__":
     app.run(debug=True)
