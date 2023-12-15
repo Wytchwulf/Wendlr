@@ -43,3 +43,14 @@ code {
 .small {
     font-size: 0.75rem;
 }
+.schedule {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+}
+@media (max-width: 576px) {
+    .schedule {
+        padding: 10px;
+    }
+}

@@ -1,19 +1,43 @@
+<!DOCTYPE html>
+<html>
 <head>
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-
+    <title>Gym Schedule</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
 <body>
-    <div class="App">
-        <header class="App-header">
-            <img src="{{ url_for('static', filename='Octocat.png') }}" class="App-logo" alt="logo" />
-            <p>
-                GitHub Codespaces <span class="heart">♥️</span> Flask
-            </p>
-            <p class="small">
-                Edit <code>templates/index.html</code> and refresh to see your changes!
-            </p>
-        </header>
+    <div class="container">
+        <h1 class="text-center mb-4">Gym Schedule</h1>
+        <p>{{ message }}</p>
+        {% if schedule %}
+            <h2>Training Schedule</h2>
+            <div class="schedule">{{ schedule|safe }}</div>
+        {% endif %}
     </div>
+    <script>
+        function incrementCounter(exerciseName) {
+            // Make an AJAX call to your Flask backend
+            fetch("/increment_counter", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({exercise: exerciseName})
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Disable the button after the click
+                const button = document.getElementById('btn_' + exerciseName);
+                button.disabled = true;
+                button.innerText = "Completed"; // Change button text or add more styling as needed
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-
 </html>
