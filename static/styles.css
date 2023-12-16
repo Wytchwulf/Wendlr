@@ -3,11 +3,11 @@
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     min-height: 100vh; /* Full viewport height */
-    background-color: #eaeaea; /* Light background for the whole page */
+    background-image: linear-gradient(to bottom right, rgb(0, 200, 255), rgb(255, 0, 255));
     font-family: 'Arial', sans-serif; /* Modern font */
 }
 .schedule {
-    background-color: #f8f9fa;
+    background: rgba(38, 4, 67, 0.4);
     border-radius: 5px;
     padding: 15px;
     margin-top: 20px;
@@ -35,4 +35,12 @@ ul {
 
 li {
     margin-bottom: 10px; /* Optional: adds space between list items */
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
