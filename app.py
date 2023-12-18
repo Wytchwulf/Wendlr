@@ -13,7 +13,6 @@ app = Flask(__name__)
 def index():
     progressive_overload()
     today = datetime.date.today()
-    current_week = get_training_week(START_DATE) 
 
     if is_gym_day(today):
         schedule = display_training_schedule(

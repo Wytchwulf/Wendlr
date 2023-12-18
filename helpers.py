@@ -266,12 +266,3 @@ def display_training_schedule(training_day):
 
     html_output += "</ul>"
     return html_output
-
-        
-
-def main():
-    print('placeholder')
-
-
-if __name__ == "__main__":
-    main()
